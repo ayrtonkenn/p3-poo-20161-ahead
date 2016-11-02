@@ -5,7 +5,8 @@ public class Merge {
 		/*
 		 * Alg de oredenação por merge
 		 * Referencia:
-		 * Ordena da seguinte lógica
+		 * Ele começa dividindo o array ao meio, em várias camadas,
+		 * chamando por recursividade até o tamaho deles for de um elemento.
 		 * Faz a seleção do primeiro elemento, caso ele seja menor que o segundo, ele troca,
 		 * e conta os que estão atrás
 		 */
@@ -42,30 +43,33 @@ public class Merge {
 		/*
 		 * comparar cada numero
 		 */
-		while (posA < arrayA.length && posB < arrayB.length) {
+		while (arrayA.length > posA && arrayB.length > posB) {
 			/*
 			 * fazer comparação simples para cada um, crescente
 			 */
-			if (arrayA[posA] > arrayB[posB]) {
+			/*if (arrayA[posA] < arrayB[posB]) {
 				
-				result[posResult] = arrayB[posB++];
+				result[posResult++] = arrayA[posA++];
+				//posB++;
 				
 			} else {
-				result[posResult] = arrayA[posA++];
-			}
+				result[posResult++] = arrayB[posB++];
+				//posA++;
+			}*/
+			result[posResult++] = (arrayA[posA] < arrayB[posB])?arrayA[posA++]:arrayB[posB++];
 		}
 		/*
-		 * op ternario para atribuir um valor para o estado do booleano
+		 * Parte de compara��o caso todos os numeros
+		 * menores estejam concentrados em um array, o que implica
+		 * em numeros que faltam ser ordeados em uma parte
 		 */
-		result[result.length-1] = (posA > posB)?lista[posA]:arrayB[posB];
+		while (posA < arrayA.length) {
+			result[posResult++] = arrayA[posA++];
+		}
+		while (posB < arrayB.length) {
+			result[posResult++] = arrayB[posB++];
+		}
 		
-		int i = 0;
-		while (i < posA) {
-			result[i] = arrayA[i++];
-		}
-		while (i < posB) {
-			result[i] = arrayB[i++];
-		}
 		return result;
 	}
 

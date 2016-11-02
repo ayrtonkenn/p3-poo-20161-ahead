@@ -19,10 +19,10 @@ public class QuickSort {
 				lista[i++] = lista[j];
 				lista[j--] = temp;
 			}
-			if(inicio < j){
-				sort(lista, inicio, j);
+			if(lista[inicio] < lista[j]){
+				sort(lista, inicio, j+1);
 			}
-			if(i < fim){
+			if(lista[i] < lista[fim]){
 				sort(lista, i, fim);
 			}
 		}
